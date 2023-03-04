@@ -1,0 +1,16 @@
+{
+    "books": [
+        {
+            "title": "An Introduction to Statistical Learning: with Applications in R",
+            "authors": "Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani",
+            "genre": "Machine Learning, Statistics",
+            "year": 2013,
+            "pages": 426,
+            "language": "English"
+        },
+        {
+            "title": "Information Systems for Managers: Text and Cases",
+            "authors": "Gabe Piccoli and Federico Pigni",
+            "genre": "Information Systems, Management",
+            "year": 2018,
+            "

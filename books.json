@@ -13,4 +13,16 @@
             "authors": "Gabe Piccoli and Federico Pigni",
             "genre": "Information Systems, Management",
             "year": 2018,
-            "
+            "pages": 448,
+            "language": "English"
+        },
+        {
+            "title": "The Elements of Statistical Learning: Data Mining, Inference, and Prediction",
+            "authors": "Trevor Hastie, Robert Tibshirani, and Jerome Friedman",
+            "genre": "Machine Learning, Statistics",
+            "year": 2001,
+            "pages": 536,
+            "language": "English"
+        }
+    ]
+}

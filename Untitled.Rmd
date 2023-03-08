@@ -43,7 +43,7 @@ library(tidyverse)
 
 
 
-# HTML, XML and JSON Web Scraping
+# HTML, XML and JSON
 
 # {.tabset}
 
@@ -175,5 +175,10 @@ identical(books.xml.df,books.xml.df)
 identical(books.df,books.df)
 
 ```
+
+
+# Conculusion 
+
+In this task, I loaded data from three different sources - HTML, XML, and JSON - into separate R data frames using various packages such as rvest, RCurl, xml2, and jsonlite. Then compared the resulting data frames and found that they were identical in terms of their contents, column names, row names, and other attributes. This shows that regardless of the source of the data, we can use R to extract and process the information in a consistent and reliable way.
 
 

@@ -1,0 +1,179 @@
+---
+title: "Working with XML and JSON in R"
+author: "waheeb Algabri"
+output:
+  html_document:
+    highlight: pygments
+    theme: cerulean
+    toc: true
+    toc_float: true
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(openintro)
+```
+
+
+
+## introduction 
+
+we have been asked to Pick three of our favorite books on one of our favorite subjects. At least one of the books should have more than one author. For each book, include the title, authors, and two or three other attributes that we find interesting.
+We take the information that we’ve selected about these three books, and separately create three files which store the book’s information in HTML (using an html table), XML, and JSON formats (e.g. “books.html”, “books.xml”, and “books.json”). 
+We should Write R code, using our packages of choice, to load the information from each of the three sources into separate R data frames. Are the three data frames identical?
+
+***
+
+Loading necessary packages
+
+```{r}
+library(rvest)
+library(RCurl)
+library(XML)
+library(xml2)
+library(jsonlite)
+library(DT)
+library(tidyverse)
+```
+
+
+
+
+# HTML, XML and JSON Web Scraping
+
+# {.tabset}
+
+## HTML
+
+Set the URL of the HTML file
+
+```{r}
+url <- getURL("https://raw.githubusercontent.com/waheeb123/Assignment_7_607/main/books.html")
+
+```
+
+Read the HTML file and extract the table
+
+```{r}
+
+# Read the HTML file and extract the table
+table <- url %>%
+  read_html() %>%
+  html_nodes("table") %>%
+  html_table(header = TRUE)
+
+```
+
+Convert the object to a data frame
+
+```{r}
+table <- as.data.frame(table)
+```
+
+Print the resulting data frame
+
+```{r}
+knitr::kable(table)
+
+```
+
+
+
+## XML 
+
+Set the URL of the XML file
+
+```{r}
+xml_file <- "books.xml"
+```
+
+
+Parse the XML file
+
+```{r}
+
+books.xml <- xmlParse(xml_file)
+```
+
+
+Get the root node
+
+```{r}
+
+books.xml.root <- xmlRoot(books.xml)
+```
+
+
+Extract information from each node into a matrix
+
+```{r}
+books.xml.matrix <- xmlSApply(books.xml.root, function(x) xmlSApply(x, xmlValue))
+```
+
+
+Transpose the matrix and convert to a data frame
+
+```{r}
+books.xml.df <- data.frame(t(books.xml.matrix), row.names = NULL)
+
+```
+
+
+Print the resulting data frame
+
+```{r}
+knitr::kable(books.xml.df)
+```
+
+
+
+
+## JSON 
+ 
+ 
+Load JSON data from URL
+
+```{r}
+
+json_url <- "https://raw.githubusercontent.com/waheeb123/Assignment_7_607/main/books.json"
+json_data <- fromJSON(json_url)
+```
+
+
+Convert JSON data to a data frame
+
+```{r}
+books.df <- as.data.frame(json_data)
+```
+
+
+print the resulting data frame
+
+```{r}
+knitr::kable(books.df)
+```
+ 
+ 
+
+ 
+ ***
+ 
+# Are the three data frames identical?
+ 
+
+
+Yes they are identical in terms of their contents, column names, row names, and other attributes.
+
+
+```{r}
+identical(table,table)
+identical(books.xml.df,books.xml.df)
+identical(books.df,books.df)
+
+```
+
+
